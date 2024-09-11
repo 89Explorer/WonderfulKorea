@@ -21,7 +21,7 @@ class MainTabBarViewController: UITabBarController {
         super.viewDidLoad()
         view.backgroundColor = UIColor(named: "newgray")
         tabBar.isHidden = true
-        
+
         view.addSubview(mainTabBarView)
         setViewControllers()
         configureConstraints()
@@ -44,13 +44,12 @@ class MainTabBarViewController: UITabBarController {
     
     // MARK: - Fuctions
     private func setViewControllers() {
-        
         let homeVC = UINavigationController(rootViewController: HomeViewController())
         let searchVC = UINavigationController(rootViewController: SearchViewController())
         let locationVC = UINavigationController(rootViewController: LocationViewController())
         let planVC = UINavigationController(rootViewController: PlanViewController())
         let profileVC = UINavigationController(rootViewController: ProfileViewController())
-        
+
         viewControllers = [homeVC, searchVC, locationVC, planVC, profileVC]
     }
 }
