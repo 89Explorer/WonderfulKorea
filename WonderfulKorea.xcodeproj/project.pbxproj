@@ -9,14 +9,19 @@
 /* Begin PBXBuildFile section */
 		9D7186FC2C916103004C81B9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D7186FB2C916103004C81B9 /* AppDelegate.swift */; };
 		9D7186FE2C916103004C81B9 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D7186FD2C916103004C81B9 /* SceneDelegate.swift */; };
-		9D7187002C916103004C81B9 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D7186FF2C916103004C81B9 /* ViewController.swift */; };
-		9D7187032C916103004C81B9 /* Base in Resources */ = {isa = PBXBuildFile; fileRef = 9D7187022C916103004C81B9 /* Base */; };
+		9D7187002C916103004C81B9 /* MainTabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D7186FF2C916103004C81B9 /* MainTabBarViewController.swift */; };
 		9D7187062C916103004C81B9 /* WonderfulKorea.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 9D7187042C916103004C81B9 /* WonderfulKorea.xcdatamodeld */; };
 		9D7187082C916104004C81B9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9D7187072C916104004C81B9 /* Assets.xcassets */; };
 		9D71870B2C916104004C81B9 /* Base in Resources */ = {isa = PBXBuildFile; fileRef = 9D71870A2C916104004C81B9 /* Base */; };
 		9D7187162C916105004C81B9 /* WonderfulKoreaTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D7187152C916105004C81B9 /* WonderfulKoreaTests.swift */; };
 		9D7187202C916105004C81B9 /* WonderfulKoreaUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D71871F2C916105004C81B9 /* WonderfulKoreaUITests.swift */; };
 		9D7187222C916105004C81B9 /* WonderfulKoreaUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D7187212C916105004C81B9 /* WonderfulKoreaUITestsLaunchTests.swift */; };
+		9D7187352C9165A4004C81B9 /* CustomTabBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D7187342C9165A4004C81B9 /* CustomTabBarView.swift */; };
+		9D71873A2C9168E2004C81B9 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D7187392C9168E2004C81B9 /* HomeViewController.swift */; };
+		9D71873C2C9168EF004C81B9 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D71873B2C9168EF004C81B9 /* SearchViewController.swift */; };
+		9D71873E2C916901004C81B9 /* LocationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D71873D2C916901004C81B9 /* LocationViewController.swift */; };
+		9D7187402C91690D004C81B9 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D71873F2C91690D004C81B9 /* ProfileViewController.swift */; };
+		9D7187422C916922004C81B9 /* PlanViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D7187412C916922004C81B9 /* PlanViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -40,8 +45,7 @@
 		9D7186F82C916103004C81B9 /* WonderfulKorea.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WonderfulKorea.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9D7186FB2C916103004C81B9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		9D7186FD2C916103004C81B9 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		9D7186FF2C916103004C81B9 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		9D7187022C916103004C81B9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		9D7186FF2C916103004C81B9 /* MainTabBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarViewController.swift; sourceTree = "<group>"; };
 		9D7187052C916103004C81B9 /* WonderfulKorea.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = WonderfulKorea.xcdatamodel; sourceTree = "<group>"; };
 		9D7187072C916104004C81B9 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		9D71870A2C916104004C81B9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -51,6 +55,12 @@
 		9D71871B2C916105004C81B9 /* WonderfulKoreaUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WonderfulKoreaUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		9D71871F2C916105004C81B9 /* WonderfulKoreaUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WonderfulKoreaUITests.swift; sourceTree = "<group>"; };
 		9D7187212C916105004C81B9 /* WonderfulKoreaUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WonderfulKoreaUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		9D7187342C9165A4004C81B9 /* CustomTabBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTabBarView.swift; sourceTree = "<group>"; };
+		9D7187392C9168E2004C81B9 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
+		9D71873B2C9168EF004C81B9 /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
+		9D71873D2C916901004C81B9 /* LocationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationViewController.swift; sourceTree = "<group>"; };
+		9D71873F2C91690D004C81B9 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
+		9D7187412C916922004C81B9 /* PlanViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlanViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -101,12 +111,9 @@
 		9D7186FA2C916103004C81B9 /* WonderfulKorea */ = {
 			isa = PBXGroup;
 			children = (
-				9D7186FB2C916103004C81B9 /* AppDelegate.swift */,
-				9D7186FD2C916103004C81B9 /* SceneDelegate.swift */,
-				9D7186FF2C916103004C81B9 /* ViewController.swift */,
-				9D7187012C916103004C81B9 /* Main.storyboard */,
-				9D7187072C916104004C81B9 /* Assets.xcassets */,
-				9D7187092C916104004C81B9 /* LaunchScreen.storyboard */,
+				9D7187302C916566004C81B9 /* Views */,
+				9D71872F2C916554004C81B9 /* Resources */,
+				9D71872E2C91654A004C81B9 /* ViewControllers */,
 				9D71870C2C916104004C81B9 /* Info.plist */,
 				9D7187042C916103004C81B9 /* WonderfulKorea.xcdatamodeld */,
 			);
@@ -128,6 +135,78 @@
 				9D7187212C916105004C81B9 /* WonderfulKoreaUITestsLaunchTests.swift */,
 			);
 			path = WonderfulKoreaUITests;
+			sourceTree = "<group>";
+		};
+		9D71872E2C91654A004C81B9 /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				9D7187382C9165FB004C81B9 /* Core */,
+				9D7187362C9165EB004C81B9 /* General */,
+			);
+			path = ViewControllers;
+			sourceTree = "<group>";
+		};
+		9D71872F2C916554004C81B9 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				9D7186FB2C916103004C81B9 /* AppDelegate.swift */,
+				9D7186FD2C916103004C81B9 /* SceneDelegate.swift */,
+				9D7187072C916104004C81B9 /* Assets.xcassets */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		9D7187302C916566004C81B9 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				9D7187312C91656F004C81B9 /* General */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		9D7187312C91656F004C81B9 /* General */ = {
+			isa = PBXGroup;
+			children = (
+				9D7187332C91658D004C81B9 /* TabBarView */,
+				9D7187322C91657B004C81B9 /* Launch */,
+			);
+			path = General;
+			sourceTree = "<group>";
+		};
+		9D7187322C91657B004C81B9 /* Launch */ = {
+			isa = PBXGroup;
+			children = (
+				9D7187092C916104004C81B9 /* LaunchScreen.storyboard */,
+			);
+			path = Launch;
+			sourceTree = "<group>";
+		};
+		9D7187332C91658D004C81B9 /* TabBarView */ = {
+			isa = PBXGroup;
+			children = (
+				9D7187342C9165A4004C81B9 /* CustomTabBarView.swift */,
+			);
+			path = TabBarView;
+			sourceTree = "<group>";
+		};
+		9D7187362C9165EB004C81B9 /* General */ = {
+			isa = PBXGroup;
+			children = (
+				9D7186FF2C916103004C81B9 /* MainTabBarViewController.swift */,
+			);
+			path = General;
+			sourceTree = "<group>";
+		};
+		9D7187382C9165FB004C81B9 /* Core */ = {
+			isa = PBXGroup;
+			children = (
+				9D7187392C9168E2004C81B9 /* HomeViewController.swift */,
+				9D71873B2C9168EF004C81B9 /* SearchViewController.swift */,
+				9D71873D2C916901004C81B9 /* LocationViewController.swift */,
+				9D7187412C916922004C81B9 /* PlanViewController.swift */,
+				9D71873F2C91690D004C81B9 /* ProfileViewController.swift */,
+			);
+			path = Core;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -236,7 +315,6 @@
 			files = (
 				9D7187082C916104004C81B9 /* Assets.xcassets in Resources */,
 				9D71870B2C916104004C81B9 /* Base in Resources */,
-				9D7187032C916103004C81B9 /* Base in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -261,10 +339,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9D7187002C916103004C81B9 /* ViewController.swift in Sources */,
+				9D7187002C916103004C81B9 /* MainTabBarViewController.swift in Sources */,
+				9D7187422C916922004C81B9 /* PlanViewController.swift in Sources */,
+				9D71873C2C9168EF004C81B9 /* SearchViewController.swift in Sources */,
+				9D7187352C9165A4004C81B9 /* CustomTabBarView.swift in Sources */,
 				9D7186FC2C916103004C81B9 /* AppDelegate.swift in Sources */,
 				9D7186FE2C916103004C81B9 /* SceneDelegate.swift in Sources */,
 				9D7187062C916103004C81B9 /* WonderfulKorea.xcdatamodeld in Sources */,
+				9D7187402C91690D004C81B9 /* ProfileViewController.swift in Sources */,
+				9D71873A2C9168E2004C81B9 /* HomeViewController.swift in Sources */,
+				9D71873E2C916901004C81B9 /* LocationViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -301,14 +385,6 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		9D7187012C916103004C81B9 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				9D7187022C916103004C81B9 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		9D7187092C916104004C81B9 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -372,6 +448,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				INFOPLIST_KEY_UIMainStoryboardFile = "";
 				IPHONEOS_DEPLOYMENT_TARGET = 17.5;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
@@ -449,11 +526,12 @@
 				DEVELOPMENT_TEAM = P9NXT375QP;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = WonderfulKorea/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = WonderKor;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.travel";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -461,6 +539,10 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.jungguen.WonderfulKorea;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -477,11 +559,12 @@
 				DEVELOPMENT_TEAM = P9NXT375QP;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = WonderfulKorea/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = WonderKor;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.travel";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -489,6 +572,10 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.jungguen.WonderfulKorea;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
