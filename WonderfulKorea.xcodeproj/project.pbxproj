@@ -111,8 +111,8 @@
 		9D7186FA2C916103004C81B9 /* WonderfulKorea */ = {
 			isa = PBXGroup;
 			children = (
-				9D7187302C916566004C81B9 /* Views */,
 				9D71872F2C916554004C81B9 /* Resources */,
+				9D7187302C916566004C81B9 /* Views */,
 				9D71872E2C91654A004C81B9 /* ViewControllers */,
 				9D71870C2C916104004C81B9 /* Info.plist */,
 				9D7187042C916103004C81B9 /* WonderfulKorea.xcdatamodeld */,

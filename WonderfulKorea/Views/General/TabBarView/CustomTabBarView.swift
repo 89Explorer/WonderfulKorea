@@ -27,7 +27,7 @@ class CustomTabBarView: UIView {
         stackView.distribution = .fillEqually
         stackView.layer.cornerRadius = 30
         stackView.clipsToBounds = true
-        stackView.backgroundColor = .systemMint
+        stackView.backgroundColor = UIColor(named: "newblue")
         return stackView
     }()
     

@@ -19,7 +19,7 @@ class MainTabBarViewController: UITabBarController {
     // MARK: - Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .systemRed
+        view.backgroundColor = UIColor(named: "newgray")
         tabBar.isHidden = true
         
         view.addSubview(mainTabBarView)
