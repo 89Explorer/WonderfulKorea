@@ -37,7 +37,16 @@ class CustomPlaceTableViewCell: UITableViewCell {
         stackView.translatesAutoresizingMaskIntoConstraints = false
         stackView.axis = .vertical
         stackView.distribution = .fill
+        stackView.spacing = 10
+        return stackView
+    }()
+    
+    let titleRatingStackView: UIStackView = {
+        let stackView = UIStackView()
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        stackView.axis = .horizontal
         stackView.spacing = 4
+        stackView.distribution = .fill
         return stackView
     }()
     
@@ -101,12 +110,67 @@ class CustomPlaceTableViewCell: UITableViewCell {
         label.translatesAutoresizingMaskIntoConstraints = false
         label.text = "4.7"
         label.textColor = .black
-        label.font = UIFont(name: "DungGeunMo", size: 14)
-        label.tintColor = .orange
+        label.font = UIFont(name: "DungGeunMo", size: 16)
+        label.textColor = .black
         return label
     }()
     
+    let categoryStackView: UIStackView = {
+        let stackView = UIStackView()
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        stackView.axis = .horizontal
+        stackView.spacing = 8
+        // stackView.distribution = .fill
+        return stackView
+    }()
     
+//    let secondCategoryLabel: UILabel = {
+//        let label = UILabel()
+//        label.translatesAutoresizingMaskIntoConstraints = false
+//        label.text = "숙박"
+//        label.backgroundColor = .orange
+//        label.layer.cornerRadius = 5
+//        label.clipsToBounds = true
+//        label.textColor = .black
+//        label.font = UIFont(name: "DungGeunMo", size: 16)
+//        label.textColor = .black
+//        return label
+//    }()
+//    
+//    let thirdCategoryLabel: UILabel = {
+//        let label = UILabel()
+//        label.translatesAutoresizingMaskIntoConstraints = false
+//        label.text = "호텔"
+//        label.backgroundColor = .orange
+//        label.layer.cornerRadius = 5
+//        label.clipsToBounds = true
+//        label.textColor = .black
+//        label.font = UIFont(name: "DungGeunMo", size: 16)
+//        label.textColor = .black
+//        return label
+//    }()
+    
+    let secondCategoryLabel: PaddingLabel = {
+        let label = PaddingLabel()
+        label.text = "숙박"
+        label.backgroundColor = .newgray
+        label.layer.cornerRadius = 5
+        label.clipsToBounds = true
+        label.textColor = .black
+        label.font = UIFont(name: "DungGeunMo", size: 14)
+        return label
+    }()
+
+    let thirdCategoryLabel: PaddingLabel = {
+        let label = PaddingLabel()
+        label.text = "호텔"
+        label.backgroundColor = .newgray
+        label.layer.cornerRadius = 5
+        label.clipsToBounds = true
+        label.textColor = .black
+        label.font = UIFont(name: "DungGeunMo", size: 14)
+        return label
+    }()
     
     // MARK: - Initializers
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
@@ -117,16 +181,24 @@ class CustomPlaceTableViewCell: UITableViewCell {
         
         basicView.addSubview(nearImageView)
         basicView.addSubview(nearStackView)
+        basicView.addSubview(categoryStackView)
         
-        nearStackView.addArrangedSubview(nearTitleLabel)
+        // nearStackView.addArrangedSubview(nearTitleLabel)
+        nearStackView.addArrangedSubview(titleRatingStackView)
         nearStackView.addArrangedSubview(addressStackView)
-        nearStackView.addArrangedSubview(ratingStackView)
+        // nearStackView.addArrangedSubview(ratingStackView)
+        //nearStackView.addArrangedSubview(categoryStackView)
         
+        titleRatingStackView.addArrangedSubview(nearTitleLabel)
+        titleRatingStackView.addArrangedSubview(ratingStackView)
         addressStackView.addArrangedSubview(addressImageView)
         addressStackView.addArrangedSubview(addressLabel)
         
         ratingStackView.addArrangedSubview(ratingImageView)
         ratingStackView.addArrangedSubview(ratingLabel)
+        
+        categoryStackView.addArrangedSubview(secondCategoryLabel)
+        categoryStackView.addArrangedSubview(thirdCategoryLabel)
         
         configureConstraints()
     }
@@ -154,18 +226,23 @@ class CustomPlaceTableViewCell: UITableViewCell {
         
         let nearStackViewConstraints = [
             nearStackView.leadingAnchor.constraint(equalTo: nearImageView.trailingAnchor, constant: 8),
-            nearStackView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 8),
-            nearStackView.centerYAnchor.constraint(equalTo: contentView.centerYAnchor, constant: -16)
+            nearStackView.centerYAnchor.constraint(equalTo: contentView.centerYAnchor, constant: -16),
+            nearStackView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -8)
         ]
         
         let addressImageViewConstraints = [
-            addressImageView.widthAnchor.constraint(equalToConstant: 14),
-            addressImageView.heightAnchor.constraint(equalToConstant: 14)
+            addressImageView.widthAnchor.constraint(equalToConstant: 16),
+            addressImageView.heightAnchor.constraint(equalToConstant: 16)
         ]
         
         let ratingImageViewConstraints = [
-            ratingImageView.widthAnchor.constraint(equalToConstant: 14),
-            ratingImageView.heightAnchor.constraint(equalToConstant: 14)
+            ratingImageView.widthAnchor.constraint(equalToConstant: 16),
+            ratingImageView.heightAnchor.constraint(equalToConstant: 16)
+        ]
+        
+        let categoryStackViewConstraints = [
+            categoryStackView.leadingAnchor.constraint(equalTo: nearImageView.trailingAnchor, constant: 16),
+            categoryStackView.topAnchor.constraint(equalTo: nearStackView.bottomAnchor, constant: 8)
         ]
         
         NSLayoutConstraint.activate(basicViewConstraints)
@@ -173,5 +250,26 @@ class CustomPlaceTableViewCell: UITableViewCell {
         NSLayoutConstraint.activate(nearStackViewConstraints)
         NSLayoutConstraint.activate(addressImageViewConstraints)
         NSLayoutConstraint.activate(ratingImageViewConstraints)
+        NSLayoutConstraint.activate(categoryStackViewConstraints)
     }
 }
+
+
+class PaddingLabel: UILabel {
+    var topInset: CGFloat = 5
+    var bottomInset: CGFloat = 5
+    var leftInset: CGFloat = 10
+    var rightInset: CGFloat = 10
+    
+    override func drawText(in rect: CGRect) {
+        let insets = UIEdgeInsets(top: topInset, left: leftInset, bottom: bottomInset, right: rightInset)
+        super.drawText(in: rect.inset(by: insets))
+    }
+    
+    override var intrinsicContentSize: CGSize {
+        let size = super.intrinsicContentSize
+        return CGSize(width: size.width + leftInset + rightInset, height: size.height + topInset + bottomInset)
+    }
+}
+
+
