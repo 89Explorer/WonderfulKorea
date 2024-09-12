@@ -102,8 +102,8 @@ class HomeContentView: UIView {
         ]
         
         let placeTableViewConstraints = [
-            placeTableView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
-            placeTableView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
+            placeTableView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 24),
+            placeTableView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -24),
             placeTableView.topAnchor.constraint(equalTo: homeSubTitleView.bottomAnchor, constant: 24),
             placeTableView.heightAnchor.constraint(equalToConstant: 1200),
             placeTableView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: 0)

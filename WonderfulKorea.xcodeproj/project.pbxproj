@@ -63,6 +63,18 @@
 		9D7187842C921F1F004C81B9 /* CategoryCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D7187832C921F1F004C81B9 /* CategoryCode.swift */; };
 		9D7187852C921F1F004C81B9 /* CategoryCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D7187832C921F1F004C81B9 /* CategoryCode.swift */; };
 		9D7187862C921F1F004C81B9 /* CategoryCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D7187832C921F1F004C81B9 /* CategoryCode.swift */; };
+		9D7187882C92883C004C81B9 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D7187872C92883C004C81B9 /* NetworkManager.swift */; };
+		9D7187892C92883C004C81B9 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D7187872C92883C004C81B9 /* NetworkManager.swift */; };
+		9D71878A2C92883C004C81B9 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D7187872C92883C004C81B9 /* NetworkManager.swift */; };
+		9D71878C2C929F97004C81B9 /* AttractionResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D71878B2C929F97004C81B9 /* AttractionResponse.swift */; };
+		9D71878D2C929F97004C81B9 /* AttractionResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D71878B2C929F97004C81B9 /* AttractionResponse.swift */; };
+		9D71878E2C929F97004C81B9 /* AttractionResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D71878B2C929F97004C81B9 /* AttractionResponse.swift */; };
+		9D7187912C92BFEE004C81B9 /* ContentCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D7187902C92BFEE004C81B9 /* ContentCategory.swift */; };
+		9D7187922C92BFEE004C81B9 /* ContentCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D7187902C92BFEE004C81B9 /* ContentCategory.swift */; };
+		9D7187932C92BFEE004C81B9 /* ContentCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D7187902C92BFEE004C81B9 /* ContentCategory.swift */; };
+		9D7187962C92C5B3004C81B9 /* extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D7187952C92C5B3004C81B9 /* extensions.swift */; };
+		9D7187972C92C5B3004C81B9 /* extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D7187952C92C5B3004C81B9 /* extensions.swift */; };
+		9D7187982C92C5B3004C81B9 /* extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D7187952C92C5B3004C81B9 /* extensions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -115,6 +127,10 @@
 		9D71877A2C9200B4004C81B9 /* CustomPlaceTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomPlaceTableView.swift; sourceTree = "<group>"; };
 		9D71877E2C9206D0004C81B9 /* CustomPlaceTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomPlaceTableViewCell.swift; sourceTree = "<group>"; };
 		9D7187832C921F1F004C81B9 /* CategoryCode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryCode.swift; sourceTree = "<group>"; };
+		9D7187872C92883C004C81B9 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
+		9D71878B2C929F97004C81B9 /* AttractionResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttractionResponse.swift; sourceTree = "<group>"; };
+		9D7187902C92BFEE004C81B9 /* ContentCategory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentCategory.swift; sourceTree = "<group>"; };
+		9D7187952C92C5B3004C81B9 /* extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = extensions.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -207,6 +223,8 @@
 		9D71872F2C916554004C81B9 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				9D7187942C92C5A2004C81B9 /* Extensions */,
+				9D71878F2C92BFD3004C81B9 /* ContentCategory */,
 				9D7187822C921F05004C81B9 /* CategoryCode */,
 				9D7187432C9171CA004C81B9 /* Fonts */,
 				9D7186FB2C916103004C81B9 /* AppDelegate.swift */,
@@ -338,6 +356,7 @@
 		9D7187772C91F8DB004C81B9 /* Network */ = {
 			isa = PBXGroup;
 			children = (
+				9D7187872C92883C004C81B9 /* NetworkManager.swift */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -345,6 +364,7 @@
 		9D7187782C91F8E8004C81B9 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				9D71878B2C929F97004C81B9 /* AttractionResponse.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -364,6 +384,22 @@
 				9D7187832C921F1F004C81B9 /* CategoryCode.swift */,
 			);
 			path = CategoryCode;
+			sourceTree = "<group>";
+		};
+		9D71878F2C92BFD3004C81B9 /* ContentCategory */ = {
+			isa = PBXGroup;
+			children = (
+				9D7187902C92BFEE004C81B9 /* ContentCategory.swift */,
+			);
+			path = ContentCategory;
+			sourceTree = "<group>";
+		};
+		9D7187942C92C5A2004C81B9 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				9D7187952C92C5B3004C81B9 /* extensions.swift */,
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -515,11 +551,15 @@
 				9D71875E2C91C8F9004C81B9 /* HomeContentView.swift in Sources */,
 				9D71876B2C91E1FC004C81B9 /* CustomCategoryCollectionViewCell.swift in Sources */,
 				9D7187002C916103004C81B9 /* MainTabBarViewController.swift in Sources */,
+				9D7187882C92883C004C81B9 /* NetworkManager.swift in Sources */,
 				9D7187672C91D1AD004C81B9 /* CustomPlaceCollectionView.swift in Sources */,
+				9D71878C2C929F97004C81B9 /* AttractionResponse.swift in Sources */,
 				9D7187422C916922004C81B9 /* PlanViewController.swift in Sources */,
+				9D7187912C92BFEE004C81B9 /* ContentCategory.swift in Sources */,
 				9D71876F2C91F5CC004C81B9 /* CustomPlaceCollectionViewCell.swift in Sources */,
 				9D7187842C921F1F004C81B9 /* CategoryCode.swift in Sources */,
 				9D71873C2C9168EF004C81B9 /* SearchViewController.swift in Sources */,
+				9D7187962C92C5B3004C81B9 /* extensions.swift in Sources */,
 				9D7187352C9165A4004C81B9 /* CustomTabBarView.swift in Sources */,
 				9D7186FC2C916103004C81B9 /* AppDelegate.swift in Sources */,
 				9D7186FE2C916103004C81B9 /* SceneDelegate.swift in Sources */,
@@ -539,13 +579,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9D7187892C92883C004C81B9 /* NetworkManager.swift in Sources */,
 				9D71876C2C91E1FC004C81B9 /* CustomCategoryCollectionViewCell.swift in Sources */,
 				9D71877C2C9200B4004C81B9 /* CustomPlaceTableView.swift in Sources */,
 				9D7187852C921F1F004C81B9 /* CategoryCode.swift in Sources */,
 				9D71875A2C91762B004C81B9 /* HomeBasicScrollView.swift in Sources */,
+				9D7187972C92C5B3004C81B9 /* extensions.swift in Sources */,
+				9D71878D2C929F97004C81B9 /* AttractionResponse.swift in Sources */,
 				9D7187642C91CFA3004C81B9 /* CustomCategoryCollectionView.swift in Sources */,
 				9D7187802C9206D0004C81B9 /* CustomPlaceTableViewCell.swift in Sources */,
 				9D7187532C91746E004C81B9 /* CustomTitleView.swift in Sources */,
+				9D7187922C92BFEE004C81B9 /* ContentCategory.swift in Sources */,
 				9D7187162C916105004C81B9 /* WonderfulKoreaTests.swift in Sources */,
 				9D7187702C91F5CC004C81B9 /* CustomPlaceCollectionViewCell.swift in Sources */,
 				9D71875F2C91C8F9004C81B9 /* HomeContentView.swift in Sources */,
@@ -560,11 +604,15 @@
 				9D7187712C91F5CC004C81B9 /* CustomPlaceCollectionViewCell.swift in Sources */,
 				9D7187542C91746E004C81B9 /* CustomTitleView.swift in Sources */,
 				9D7187862C921F1F004C81B9 /* CategoryCode.swift in Sources */,
+				9D71878A2C92883C004C81B9 /* NetworkManager.swift in Sources */,
 				9D71876D2C91E1FC004C81B9 /* CustomCategoryCollectionViewCell.swift in Sources */,
+				9D71878E2C929F97004C81B9 /* AttractionResponse.swift in Sources */,
 				9D7187692C91D1AD004C81B9 /* CustomPlaceCollectionView.swift in Sources */,
+				9D7187932C92BFEE004C81B9 /* ContentCategory.swift in Sources */,
 				9D7187652C91CFA3004C81B9 /* CustomCategoryCollectionView.swift in Sources */,
 				9D7187812C9206D0004C81B9 /* CustomPlaceTableViewCell.swift in Sources */,
 				9D71875B2C91762B004C81B9 /* HomeBasicScrollView.swift in Sources */,
+				9D7187982C92C5B3004C81B9 /* extensions.swift in Sources */,
 				9D71877D2C9200B4004C81B9 /* CustomPlaceTableView.swift in Sources */,
 				9D7187222C916105004C81B9 /* WonderfulKoreaUITestsLaunchTests.swift in Sources */,
 				9D7187602C91C8F9004C81B9 /* HomeContentView.swift in Sources */,

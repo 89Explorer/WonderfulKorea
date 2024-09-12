@@ -6,3 +6,15 @@
 //
 
 import Foundation
+
+// MARK: - Enum
+enum ContentCategory: String {
+    case attractions = "12"
+    case facilities = "14"
+    case course = "25"
+    case restaurant = "38"
+    
+    var contentTypeId: String {
+        return self.rawValue
+    }
+}

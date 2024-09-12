@@ -10,9 +10,9 @@ import UIKit
 class HomeViewController: UIViewController{
     
     // MARK: - Variables
-    private let placeCategories = ["자연", "인문(문화/예술/역사)", "추천코스", "음식"]
+    private let placeCategories = ["자연", "인문(문화/예술/역사)", "추천코스", "음식/쇼핑"]
     private var placeSelectedIndex: Int = 0
-    
+    private var receivedItems: [Item] = []
     
     
     
@@ -39,8 +39,10 @@ class HomeViewController: UIViewController{
         
         collectionViewDelegate()
         tableViewDeleagte()
+        
+        getRandomPageData(contentTypeId: "12")
     }
-
+    
     
     // MARK: - Layouts
     private func configureConstraints() {
@@ -57,6 +59,34 @@ class HomeViewController: UIViewController{
     
     
     // MARK: - Functions
+    // 랜덤으로 카테고리별 데이터를 받아오는 함수
+    private func getRandomPageData(contentTypeId: String) {
+        NetworkManager.shared.fetchRandomPageData(contentTypeId: contentTypeId) { [weak self] results in
+            switch results {
+            case .success(let items):
+                // firstImage가 nil이 아니고, 빈 문자열이 아닌 모든 요소 확인
+                let validItems = items.filter {
+                    if let firstImage = $0.firstimage {
+                        return !firstImage.isEmpty
+                    }
+                    return false
+                }
+                DispatchQueue.main.async {
+                    self?.receivedItems = validItems
+                    self?.homeView.getHomeContentView().placeCollectionView.customplaceCollectionView.reloadData()
+                    // 데이터를 다시 로드한 후 첫 번째 행으로 스크롤
+                    //                    if !validItems.isEmpty {
+                    //
+                    //                        self?.mainTableView.getMainTable().scrollToRow(at: IndexPath(row: 0, section: 0), at: .top, animated: true)
+                    //                    }
+                }
+            case .failure(let error):
+                print(error.localizedDescription)
+            }
+        }
+    }
+    
+    
     // 네비게이션바 설정
     private func configureNavigationBar() {
         let originalImage = UIImage(named: "trip-logo-removebg")
@@ -127,20 +157,28 @@ class HomeViewController: UIViewController{
 }
 
 
-
 // MARK: - Extensions
 extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSource {
+    
+    func isCategoryCollectionView(_ collectionView: UICollectionView) -> Bool {
+        return collectionView == homeView.getHomeContentView().categoryCollectionView.customCategoryCollectionView
+    }
+    
+    func isPlaceCollectionView(_ collectionView: UICollectionView) -> Bool {
+        return collectionView == homeView.getHomeContentView().placeCollectionView.customplaceCollectionView
+    }
+    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        if collectionView == homeView.getHomeContentView().categoryCollectionView.customCategoryCollectionView {
+        if isCategoryCollectionView(collectionView) {
             return placeCategories.count
-        } else if collectionView == homeView.getHomeContentView().placeCollectionView.customplaceCollectionView {
-            return 10
+        } else if isPlaceCollectionView(collectionView) {
+            return receivedItems.count
         }
         return 20
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        if collectionView == homeView.getHomeContentView().categoryCollectionView.customCategoryCollectionView {
+        if isCategoryCollectionView(collectionView) {
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CustomCategoryCollectionViewCell.identifier, for: indexPath) as? CustomCategoryCollectionViewCell else { return UICollectionViewCell() }
             
             let isSelected = indexPath.item == placeSelectedIndex
@@ -150,9 +188,11 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
             
             return cell
             
-        } else if collectionView == homeView.getHomeContentView().placeCollectionView.customplaceCollectionView {
-            
+        } else if isPlaceCollectionView(collectionView) {
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CustomPlaceCollectionViewCell.identifier, for: indexPath) as? CustomPlaceCollectionViewCell else { return UICollectionViewCell() }
+            
+            let model = receivedItems[indexPath.row]
+            cell.getRandomPlaceData(with: model)
             cell.backgroundColor = .clear
             return cell
         }
@@ -160,12 +200,38 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
         return UICollectionViewCell()
     }
     
-    
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        
         if collectionView == homeView.getHomeContentView().categoryCollectionView.customCategoryCollectionView {
-            placeSelectedIndex = indexPath.item
-            print("\(placeCategories[placeSelectedIndex]) - called")
-            homeView.getHomeContentView().categoryCollectionView.customCategoryCollectionView.reloadData()
+            let previousSelectedIndex = placeSelectedIndex  // 이전에 선택된 인덱스 저장
+            placeSelectedIndex = indexPath.item  // 새로운 선택 인덱스로 업데이트
+            
+            let selectedIndexPath = IndexPath(item: placeSelectedIndex, section: 0)
+            let previousSelectedIndexPath = IndexPath(item: previousSelectedIndex, section: 0)
+            
+            // 이전 선택 항목이 유효한 경우에만 리로드
+            if previousSelectedIndex != placeSelectedIndex {
+                homeView.getHomeContentView().categoryCollectionView.customCategoryCollectionView.reloadItems(at: [selectedIndexPath, previousSelectedIndexPath])
+            }
+            
+            // 필요한 데이터 처리
+            var selectedCategory: ContentCategory?
+            switch placeSelectedIndex {
+            case 0:
+                selectedCategory = .attractions
+            case 1:
+                selectedCategory = .facilities
+            case 2:
+                selectedCategory = .course
+            case 3:
+                selectedCategory = .restaurant
+            default:
+                break
+            }
+            
+            if let category = selectedCategory {
+                getRandomPageData(contentTypeId: category.contentTypeId)
+            }
         }
     }
 }
