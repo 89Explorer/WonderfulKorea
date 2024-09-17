@@ -16,6 +16,10 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate {
     private var placeSelectedIndex: Int = 0
     private var receivedItems: [Item] = []
     private var userLocation: String = ""
+    private var userLatitude: String = ""
+    private var userLongitude: String = ""
+    
+    private var locationReceivedItems: [Item] = []
     
     // 위치 정보
     let locationManager = CLLocationManager()
@@ -246,7 +250,8 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate {
     // 2. 위치 업데이트 메서드 (위도, 경도를 통해 주소 변환)
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         guard let location = locations.last else { return }
-        
+        self.userLatitude = "\(location.coordinate.latitude)"
+        self.userLongitude = "\(location.coordinate.longitude)"
         // 경도와 위도를 통해 지번/도로명 주소 변환
         reverseGeocode(location: location) { userLocation in
             if let userLocation = userLocation {
@@ -255,8 +260,21 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate {
                 // 메인 스레드에서 UI 업데이트
                 DispatchQueue.main.async {
                     self.getHomSubTitleView(main: "동동이님, 근처에는 말이에요 😄", sub: "현재 위치: \(userLocation)")
+                    
+                    // 관광지 데이터 가져오기
+                    NetworkManager.shared.getSpotDataFromLocation(mapX: self.userLongitude, mapY: self.userLatitude) { [weak self] result in
+                        switch result {
+                        case .success(let item):
+                            // 데이터를 받아온 후 첫 번째 아이템을 사용하여 configureData 호출
+                            self?.locationReceivedItems = item
+                            DispatchQueue.main.async {
+                                self?.homeView.getHomeContentView().placeTableView.customPlaceTableView.reloadData() // 여기서 테이블 뷰를 다시 로드합니다.
+                            }
+                        case .failure(let error):
+                            print("Failed to fetch attraction data: \(error)")
+                        }
+                    }
                 }
-                
             } else {
                 print("Failed to retrieve user location")
             }
@@ -287,7 +305,7 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate {
             }
             
             // 지번 주소 구성
-            let country = placemark.country ?? ""
+            // let country = placemark.country ?? ""
             let administrativeArea = placemark.administrativeArea ?? ""
             let locality = placemark.locality ?? ""
             let subLocality = placemark.subLocality ?? ""
@@ -455,17 +473,21 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
 
 extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 10
+        return locationReceivedItems.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         guard let cell = tableView.dequeueReusableCell(withIdentifier: CustomPlaceTableViewCell.identifier, for: indexPath) as? CustomPlaceTableViewCell else { return UITableViewCell() }
+        
+        let model = locationReceivedItems[indexPath.row]
+        cell.configureData(with: model)
         cell.backgroundColor = .clear
         cell.selectionStyle = .none
         
         return cell
     }
+    
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 120
     }

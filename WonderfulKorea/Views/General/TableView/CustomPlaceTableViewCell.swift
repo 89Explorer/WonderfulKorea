@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SDWebImage
 
 class CustomPlaceTableViewCell: UITableViewCell {
     
@@ -124,31 +125,31 @@ class CustomPlaceTableViewCell: UITableViewCell {
         return stackView
     }()
     
-//    let secondCategoryLabel: UILabel = {
-//        let label = UILabel()
-//        label.translatesAutoresizingMaskIntoConstraints = false
-//        label.text = "숙박"
-//        label.backgroundColor = .orange
-//        label.layer.cornerRadius = 5
-//        label.clipsToBounds = true
-//        label.textColor = .black
-//        label.font = UIFont(name: "DungGeunMo", size: 16)
-//        label.textColor = .black
-//        return label
-//    }()
-//    
-//    let thirdCategoryLabel: UILabel = {
-//        let label = UILabel()
-//        label.translatesAutoresizingMaskIntoConstraints = false
-//        label.text = "호텔"
-//        label.backgroundColor = .orange
-//        label.layer.cornerRadius = 5
-//        label.clipsToBounds = true
-//        label.textColor = .black
-//        label.font = UIFont(name: "DungGeunMo", size: 16)
-//        label.textColor = .black
-//        return label
-//    }()
+    //    let secondCategoryLabel: UILabel = {
+    //        let label = UILabel()
+    //        label.translatesAutoresizingMaskIntoConstraints = false
+    //        label.text = "숙박"
+    //        label.backgroundColor = .orange
+    //        label.layer.cornerRadius = 5
+    //        label.clipsToBounds = true
+    //        label.textColor = .black
+    //        label.font = UIFont(name: "DungGeunMo", size: 16)
+    //        label.textColor = .black
+    //        return label
+    //    }()
+    //
+    //    let thirdCategoryLabel: UILabel = {
+    //        let label = UILabel()
+    //        label.translatesAutoresizingMaskIntoConstraints = false
+    //        label.text = "호텔"
+    //        label.backgroundColor = .orange
+    //        label.layer.cornerRadius = 5
+    //        label.clipsToBounds = true
+    //        label.textColor = .black
+    //        label.font = UIFont(name: "DungGeunMo", size: 16)
+    //        label.textColor = .black
+    //        return label
+    //    }()
     
     let secondCategoryLabel: PaddingLabel = {
         let label = PaddingLabel()
@@ -160,7 +161,7 @@ class CustomPlaceTableViewCell: UITableViewCell {
         label.font = UIFont(name: "DungGeunMo", size: 14)
         return label
     }()
-
+    
     let thirdCategoryLabel: PaddingLabel = {
         let label = PaddingLabel()
         label.text = "호텔"
@@ -252,9 +253,42 @@ class CustomPlaceTableViewCell: UITableViewCell {
         NSLayoutConstraint.activate(ratingImageViewConstraints)
         NSLayoutConstraint.activate(categoryStackViewConstraints)
     }
+    
+    // MARK: - Functions
+    func configureData(with model: Item) {
+        
+        guard let posterPath = model.firstimage,
+              var title = model.title,
+              var address = model.addr1 else { return }
+        
+        title = (title.count != 0) ? title : " - "
+        address = (address.count != 0) ? address : " - "
+        
+        let moodifiedAddress = getAddressPrefix(fullAddress: address, wordCount: 3)
+        
+        let securePosterURL = posterPath.replacingOccurrences(of: "http://", with: "https://")
+        
+        if let url = URL(string: securePosterURL) {
+            nearImageView.sd_setImage(with: url)
+        } else {
+            nearImageView.image = UIImage(systemName: "house.fill")
+        }
+        
+        let modifiedTitle = title.removingParentheses()
+        nearTitleLabel.text = modifiedTitle
+        addressLabel.text = moodifiedAddress
+    }
+    
+    // 띄어쓰기로 문자열 구분
+    func getAddressPrefix(fullAddress: String, wordCount: Int) -> String {
+        let components = fullAddress.split(separator: " ")  // 띄어쓰기 기준으로 문자열 분리
+        let prefix = components.prefix(wordCount)          // 원하는 단어 개수만큼 가져옴
+        return prefix.joined(separator: " ")               // 다시 띄어쓰기로 합침
+    }
 }
 
 
+// MARK: - Class
 class PaddingLabel: UILabel {
     var topInset: CGFloat = 5
     var bottomInset: CGFloat = 5
