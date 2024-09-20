@@ -85,7 +85,7 @@ class NetworkManager {
         }
     }
     
-    func getSpotDataFromLocation(mapX: String, mapY: String, radius: String = "10000", completion: @escaping (Result<[Item], Error>) -> Void) {
+    func getSpotDataFromLocation(mapX: String, mapY: String, radius: String = "10000", contentTypeId: String = "12" ,completion: @escaping (Result<[Item], Error>) -> Void) {
         var components = URLComponents(string: "\(Constants.base_URL)/locationBasedList1")
         
         // 쿼리 아이템 설정
@@ -93,7 +93,7 @@ class NetworkManager {
             URLQueryItem(name: "serviceKey", value: Constants.api_key),
             URLQueryItem(name: "numOfRows", value: "10"),
             URLQueryItem(name: "pageNo", value: "1"),
-            URLQueryItem(name: "MobileOS", value: "ETC"),
+            URLQueryItem(name: "MobileOS", value: "IOS"),
             URLQueryItem(name: "MobileApp", value: "AppTest"),
             URLQueryItem(name: "_type", value: "json"),
             URLQueryItem(name: "listYN", value: "Y"),
@@ -101,7 +101,7 @@ class NetworkManager {
             URLQueryItem(name: "mapX", value: mapX),
             URLQueryItem(name: "mapY", value: mapY),
             URLQueryItem(name: "radius", value: radius),
-            URLQueryItem(name: "contentTypeId", value: "12")
+            URLQueryItem(name: "contentTypeId", value: contentTypeId)
         ]
         
         // 퍼센트 인코딩 후 "+"를 "%2B"로 대체
@@ -129,4 +129,52 @@ class NetworkManager {
         }
         task.resume()
     }
+    
+    func getSpotImage(contentId: String, completion: @escaping (Result<[ImageItem], Error>) -> Void) {
+        var components = URLComponents(string: "\(Constants.base_URL)/detailImage1")
+        
+        // 쿼리 아이템 설정
+        components?.queryItems = [
+            URLQueryItem(name: "serviceKey", value: Constants.api_key),
+            URLQueryItem(name: "MobileOS", value: "IOS"),
+            URLQueryItem(name: "MobileApp", value: "AppTest"),
+            URLQueryItem(name: "_type", value: "json"),
+            URLQueryItem(name: "contentId", value: contentId),
+            URLQueryItem(name: "imageYN", value: "Y"),
+            URLQueryItem(name: "subImageYN", value: "Y"),
+            URLQueryItem(name: "numOfRows", value: "10"),
+            URLQueryItem(name: "pageNo", value: "1")
+        ]
+        
+        // 퍼센트 인코딩 후 "+"를 "%2B"로 대체
+        if let encodedQuery = components?.percentEncodedQuery?.replacingOccurrences(of: "%25", with: "%") {
+            components?.percentEncodedQuery = encodedQuery
+        }
+        // URL 생성
+        guard let url = components?.url else { return }
+        
+        let task = URLSession.shared.dataTask(with: URLRequest(url: url)) { data, _, error in
+            guard let data = data, error == nil else {
+                if let error = error {
+                    completion(.failure(error))
+                    print("error 발생 1")
+                }
+                return
+            }
+            
+            do {
+                
+                let results = try JSONDecoder().decode(ImageResponse.self, from: data)
+                // 안전하게 items를 언래핑하고 nil일 경우 빈 배열 반환
+                let items = results.response.body.items?.item ?? []
+                completion(.success(items))
+                
+            } catch {
+                completion(.failure(error))
+                print("error 발생 2")
+            }
+        }
+        task.resume()
+    }
+
 }

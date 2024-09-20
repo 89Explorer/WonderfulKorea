@@ -13,7 +13,7 @@ class CustomPlaceCollectionViewCell: UICollectionViewCell {
     // MARK: - Variables
     static let identifier = "CustomPlaceCollectionViewCell"
     
-    // MARK: - UI COMPONENTS
+    // MARK: - UI Components
     private let basicView: UIView = {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
@@ -122,7 +122,7 @@ class CustomPlaceCollectionViewCell: UICollectionViewCell {
         return label
     }()
     
-    // MARK: - INITIALIZERS
+    // MARK: - Initializers
     override init(frame: CGRect) {
         super.init(frame: frame)
         self.backgroundColor = .white

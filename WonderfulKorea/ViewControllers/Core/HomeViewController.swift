@@ -11,6 +11,7 @@ import Contacts
 
 class HomeViewController: UIViewController, CLLocationManagerDelegate {
     
+    
     // MARK: - Variables
     private let placeCategories = ["자연", "인문(문화/예술/역사)", "추천코스", "음식/쇼핑"]
     private var placeSelectedIndex: Int = 0
@@ -20,6 +21,8 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate {
     private var userLongitude: String = ""
     
     private var locationReceivedItems: [Item] = []
+    private var selectedContentTypeId: String = "12"
+    
     
     // 위치 정보
     let locationManager = CLLocationManager()
@@ -42,7 +45,6 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate {
         
         title = "Home"
         getHomeTitleView(main: "동동이님, 이런 곳은 어떤가요? 😀", sub: "카테고리 별 랜덤 리스트")
-        //        getHomSubTitleView(main: "동동이님, 근처에는 말이에요 😄", sub: "현재 위치: \(userLocation)")
         
         configureNavigationBar()
         configureConstraints()
@@ -52,7 +54,6 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate {
         
         getRandomPageData(contentTypeId: "12")
         checkUserDeviceLocationServiceAuthorization()
-        print(userLocation)
     }
     
     
@@ -86,11 +87,13 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate {
                 DispatchQueue.main.async {
                     self?.receivedItems = validItems
                     self?.homeView.getHomeContentView().placeCollectionView.customplaceCollectionView.reloadData()
+                    
                     // 데이터를 다시 로드한 후 첫 번째 행으로 스크롤
                     //                    if !validItems.isEmpty {
                     //
                     //                        self?.mainTableView.getMainTable().scrollToRow(at: IndexPath(row: 0, section: 0), at: .top, animated: true)
                     //                    }
+                    
                 }
             case .failure(let error):
                 print(error.localizedDescription)
@@ -231,6 +234,7 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate {
         }
     }
     
+    
     func showRequestLocationServiceAlert() {
         let requestLocationServiceAlert = UIAlertController(title: "위치 정보 이용", message: "위치 서비스를 사용할 수 없습니다.\n디바이스의 '설정 > 개인정보 보호'에서 위치 서비스를 켜주세요.", preferredStyle: .alert)
         let goSetting = UIAlertAction(title: "설정으로 이동", style: .destructive) { _ in
@@ -247,6 +251,7 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate {
         present(requestLocationServiceAlert, animated: true)
     }
     
+    
     // 2. 위치 업데이트 메서드 (위도, 경도를 통해 주소 변환)
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         guard let location = locations.last else { return }
@@ -262,7 +267,7 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate {
                     self.getHomSubTitleView(main: "동동이님, 근처에는 말이에요 😄", sub: "현재 위치: \(userLocation)")
                     
                     // 관광지 데이터 가져오기
-                    NetworkManager.shared.getSpotDataFromLocation(mapX: self.userLongitude, mapY: self.userLatitude) { [weak self] result in
+                    NetworkManager.shared.getSpotDataFromLocation(mapX: self.userLongitude, mapY: self.userLatitude, contentTypeId: self.selectedContentTypeId) { [weak self] result in
                         switch result {
                         case .success(let item):
                             // 데이터를 받아온 후 첫 번째 아이템을 사용하여 configureData 호출
@@ -454,19 +459,40 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
             switch placeSelectedIndex {
             case 0:
                 selectedCategory = .attractions
+                selectedContentTypeId = selectedCategory!.rawValue
             case 1:
                 selectedCategory = .facilities
+                selectedContentTypeId = selectedCategory!.rawValue
             case 2:
                 selectedCategory = .course
+                selectedContentTypeId = selectedCategory!.rawValue
             case 3:
                 selectedCategory = .restaurant
+                selectedContentTypeId = selectedCategory!.rawValue
             default:
                 break
             }
             
             if let category = selectedCategory {
                 getRandomPageData(contentTypeId: category.contentTypeId)
+                NetworkManager.shared.getSpotDataFromLocation(mapX: self.userLongitude, mapY: self.userLatitude, contentTypeId: self.selectedContentTypeId) { [weak self] results in
+                    switch results {
+                    case .success(let item):
+                        self?.locationReceivedItems = item
+                        DispatchQueue.main.async {
+                            self?.homeView.getHomeContentView().placeTableView.customPlaceTableView.reloadData()
+                        }
+                    case .failure(let error):
+                        print(error.localizedDescription)
+                    }
+                }
             }
+        }
+        
+        if collectionView == homeView.getHomeContentView().placeCollectionView.customplaceCollectionView {
+            let detailVC = DetailViewController()
+            detailVC.model = receivedItems[indexPath.item]
+            navigationController?.pushViewController(detailVC, animated: true)
         }
     }
 }
@@ -491,39 +517,12 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 120
     }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let detailVC = DetailViewController()
+        let selectedItem = locationReceivedItems[indexPath.item]
+        
+        detailVC.model = selectedItem
+        navigationController?.pushViewController(detailVC, animated: true)
+    }
 }
-//
-//
-//extension HomeViewController: CLLocationManagerDelegate {
-//    // 사용자의 위치를 성공적으로 가져왔을 때 호출
-//    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-//
-//        // 위치 정보를 배열로 입력받는데, 마지막 index값이 가장 정확하다고 한다.
-//        if let coordinate = locations.last?.coordinate {
-//            // ⭐️ 사용자 위치 정보 사용
-//            print("사용자의 위치 - 위도: \(coordinate.latitude), 경도: \(coordinate.longitude)")
-//        }
-//
-//        // startUpdatingLocation()을 사용하여 사용자 위치를 가져왔다면
-//        // 불필요한 업데이트를 방지하기 위해 stopUpdatingLocation을 호출
-//        locationManager.stopUpdatingLocation()
-//    }
-//
-//    // 사용자가 GPS 사용이 불가한 지역에 있는 등 위치 정보를 가져오지 못했을 때 호출
-//    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
-//        print(#function)
-//        print("위치 정보를 가져오는 데 실패했습니다: \(error.localizedDescription)")
-//    }
-//
-//    // 앱에 대한 권한 설정이 변경되면 호출 (iOS 14 이상)
-//    private func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
-//        // 사용자 디바이스의 위치 서비스가 활성화 상태인지 확인하는 메서드 호출
-//        checkUserDeviceLocationServiceAuthorization()
-//    }
-//
-//    // 앱에 대한 권한 설정이 변경되면 호출 (iOS 14 미만)
-//    func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
-//        // 사용자 디바이스의 위치 서비스가 활성화 상태인지 확인하는 메서드 호출
-//        checkUserDeviceLocationServiceAuthorization()
-//    }
-//}
